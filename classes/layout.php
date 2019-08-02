@@ -1,6 +1,7 @@
 <?php
 // This class contains all the things we're gonna be using in our HTML more than once. Basic things like the header, navbar and footer.
 // You can, of course, remove any of these, if you do not need them
+
 class Layout
 {
     use Singleton;
@@ -35,9 +36,10 @@ class Layout
     public function footer()
     {
         ?>
-            <footer class="mt-auto text-center text-muted">
+            <footer class="mb-auto text-center text-muted">
                 <!-- Didn't know what to add in this footer so whatever -->
-                <p>© Incompetent asshole 2019</p>
+                <p class="ml-4">© Stop Scammerne</p>
+                <p>Version: <?=Config::i()->getRealVer()?></p>
             </footer>
             <script src="/vendor/jquery-3.4.1/jquery.min.js"></script>
             <script src="/vendor/popper-1.14.7/popper.min.js"></script>
