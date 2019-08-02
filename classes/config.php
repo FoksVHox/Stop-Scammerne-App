@@ -7,9 +7,9 @@ class Config
 
     /* MYSQL CONNECTION */
     private static $SQL = [
-        'user' => '%%SQLUSER%%',
-        'pass' => '%%SQLPASS%%',
-        'default_database' => '%%SQLDATABASE%%',
+        'user' => 'sxtdbu_stopscammerne',
+        'pass' => '08a7bad9daf609f9',
+        'default_database' => 'sxtdb_stopscammerne',
     ];
 
     // App version. Remember to change this when you update your app, to not have caching of your assets be messed up.
@@ -18,7 +18,7 @@ class Config
     private static $InDevelopment = true;
 
     // Stavox API key
-    private static $SxApiKey = '%%SXAPIKEY%%';
+    private static $SxApiKey = '344662e76a00aa9536637b947efd2a8729054927cdb539ae2147686f77758d4a62acf0a5438c5c89349ff5b78b37e7f796096cc15315ae2febe970b484ee3812';
 
     // Everything below is simply some functions to get the data out from this file
 

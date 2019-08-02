@@ -1,0 +1,10 @@
+FTP Detaljer
+Host: ftp.web1.lim1.straire.net:21
+Username: sxtftpu_stopscammerne
+Password: 16300088afc0d2da
+
+SQL Detaljer
+Host: sql.web1.lim1.straire.net:3306
+Database: sxtdb_stopscammerne
+Username: sxtdbu_stopscammerne
+Password: 08a7bad9daf609f9
