@@ -14,6 +14,7 @@ class Layout
 
             <!-- Adding the Config::i()->getVersion() thing makes caching way easier to deal with. In development mode, the version will be a randomized string on each visit, to completely bypass the cache -->
             <link rel="stylesheet" type="text/css" href="/assets/css/app.css?v=<?=Config::i()->getVersion()?>">
+            <script src="https://kit.fontawesome.com/05b497df87.js"></script>
         </head>
         <?php
     }
@@ -25,10 +26,24 @@ class Layout
             <a class="navbar-brand" href="/">My cool app</a>
 
             <ul class="navbar-nav mr-auto">
-                <li class="nav-item">
-                    <a class="nav-link" href="/">Home</a>
-                </li>
+                <a class="nav-link active" href="/">Hjem</a>
+                <a class="nav-link active" href="/blacklist.php">Blacklist</a>
             </ul>
+            <div class="nav-item dropdown">
+                <a class="dropdown-toggle mr-3" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false" style="color: white; text-decoration: none;"> Logget ind som: <?=User::i()->getName()?></a>
+                <div class="dropdown-menu">
+
+                    <!-- Profil -->
+                    <a class="dropdown-item" href="profile.php"><i class="fa fa-user"></i> Min profil</a>
+
+                    <!-- Admin tjek -->
+                    <a class="dropdown-item" href="user.php"></i> Mine Licenser</a>
+                    <a class="dropdown-item" href="devreq.php"><i class="far fa-file-alt"></i> Udviker</a>
+                    <a class="dropdown-item"href="dashboard.php"><i class="fas fa-tachometer-alt"></i> Dashboard</a>
+                    <div class="dropdown-divider"></div>
+                    <a class="dropdown-item"href="admin.php" style="color: green;"><i class="fas fa-shield-alt"></i> Moderator</a>
+                </div>
+            </div>
         </nav>
         <?php
     }

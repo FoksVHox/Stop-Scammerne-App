@@ -10,16 +10,12 @@ User::i()->login();
 // Echo the <head> into our document
 Layout::i()->header();
 
-?>
-<body>
-
-<?php
 // Echo our navbar
 Layout::i()->nav();
 ?>
 
 <div class="text-center">
-    <h1 class="display-4">Velkommen til Stop</h1>
+    <h1 class="display-4">Velkommen til Stop Scammerne</h1>
     <button id="notification" class="btn btn-warning">Send notification</button>
     <a href="/player.php" class="btn btn-primary">View my player data</a>
     <!-- Set tablet closeable checkbox -->
@@ -27,7 +23,7 @@ Layout::i()->nav();
         <input type="checkbox" class="custom-control-input" id="tabletcloseable" checked>
         <label class="custom-control-label" for="tabletcloseable">Allow tablet to be closed</label>
     </div>
-    <?=Blacklist::i()->BlacklistRequest('STEAM_0:1:50262050', 'han lugter', '123')?>
+    <?=Blacklist::i()->BlacklistRequest('STEAM_0:1:50262050', 'han lugter', '123', '123')?>
 </div>
 
 <?php

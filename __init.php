@@ -49,3 +49,34 @@ if (Config::i()->isDevelopment()) {
     ini_set('display_startup_errors', 1);
     error_reporting(E_ALL);
 }
+
+## Make custom tables
+
+// Make Scam_Report table
+SQL::i()->MakeTable('create table if not exists Scam_Report
+(
+	ID int auto_increment,
+	ReporterID varchar(255) not null,
+	ScammerID VARCHAR(255) not null,
+	Reason TEXT not null,
+	Proff TEXT not null,
+	created datetime default current_timestamp null,
+	constraint Scam_Report_pk
+		primary key (ID),
+	constraint Scam_Report_Users_SteamID_fk
+		foreign key (ReporterID) references Users (SteamID)
+);');
+
+// Make Scam_Requests table
+//SQL::i()->MakeTable('create table if not exists Scam_Scammers
+//(
+//	ID int auto_increment,
+//	ScamID varchar(255) null,
+//	Reason text not null,
+//	Proff TEXT not null,
+//	created timestamp default current_timestamp null,
+//	constraint Scam_Scammers_pk
+//		primary key (ID),
+//	constraint Scam_Scammers_Scam_Report_ScammerID_fk
+//		foreign key (ScamID) references Scam_Report (ScammerID)
+//);');

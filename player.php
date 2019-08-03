@@ -19,10 +19,6 @@ if(User::i()->getGangID()){
     }
 }
 
-?>
-<body>
-
-<?php
 // Echo our navbar
 Layout::i()->nav();
 ?>
