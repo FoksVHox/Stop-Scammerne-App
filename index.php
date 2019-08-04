@@ -23,7 +23,7 @@ Layout::i()->nav();
         <input type="checkbox" class="custom-control-input" id="tabletcloseable" checked>
         <label class="custom-control-label" for="tabletcloseable">Allow tablet to be closed</label>
     </div>
-    <?=Blacklist::i()->BlacklistRequest('STEAM_0:1:50262050', 'han lugter', '123', '123')?>
+    
 </div>
 
 <?php

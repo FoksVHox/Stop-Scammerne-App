@@ -16,7 +16,7 @@ Layout::i()->nav();
 
 <div class="container">
     <div class="container-fluid">
-        Comming soon
+        
     </div>
 </div>
 

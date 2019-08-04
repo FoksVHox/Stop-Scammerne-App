@@ -67,16 +67,20 @@ SQL::i()->MakeTable('create table if not exists Scam_Report
 		foreign key (ReporterID) references Users (SteamID)
 );');
 
-// Make Scam_Requests table
-//SQL::i()->MakeTable('create table if not exists Scam_Scammers
-//(
-//	ID int auto_increment,
-//	ScamID varchar(255) null,
-//	Reason text not null,
-//	Proff TEXT not null,
-//	created timestamp default current_timestamp null,
-//	constraint Scam_Scammers_pk
-//		primary key (ID),
-//	constraint Scam_Scammers_Scam_Report_ScammerID_fk
-//		foreign key (ScamID) references Scam_Report (ScammerID)
-//);');
+// Make Scam_Blacklist table
+SQL::i()->MakeTable('create table if not exists Scam_Blacklist
+(
+	ID int auto_increment,
+	ReporterID varchar(255) null,
+	ScammerID varchar(255) null,
+	Reason TEXT null,
+	Proff text null,
+	Authenticater varchar(255) null,
+	Created timestamp default current_timestamp null,
+	constraint Scam_Blacklist_pk
+		primary key (ID),
+	constraint Scam_Blacklist_Users__SteamID_fk
+		foreign key ( ReporterID) references Users (SteamID),
+	constraint Scam_Blacklist_Users__SteamID_fk_2
+		foreign key (Authenticater) references Users (SteamID)
+);');
