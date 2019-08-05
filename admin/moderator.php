@@ -2,7 +2,7 @@
 // This is the index/front page of your app. This is what will be shown to the user upon startup
 
 // Requires our autoloading and classes
-require_once '__init.php';
+require_once '../__init.php';
 
 // Handle user sign-in
 User::i()->login();
@@ -12,19 +12,9 @@ Layout::i()->header();
 
 // Echo our navbar
 Layout::i()->nav();
+Layout::i()->Sidebar();
 ?>
 
-<div class="text-center">
-    <h1 class="display-4">Velkommen til <?=Config::i()->getAppName()?></h1>
-    <button id="notification" class="btn btn-warning">Send notification</button>
-    <a href="/player.php" class="btn btn-primary">View my player data</a>
-    <!-- Set tablet closeable checkbox -->
-    <div class="custom-control custom-checkbox mt-2">
-        <input type="checkbox" class="custom-control-input" id="tabletcloseable" checked>
-        <label class="custom-control-label" for="tabletcloseable">Allow tablet to be closed</label>
-    </div>
-    
-</div>
 
 <?php
 // Echo our footer and scripts

@@ -77,6 +77,7 @@ SQL::i()->MakeTable('create table if not exists Scam_Blacklist
 	Proff text null,
 	Authenticater varchar(255) null,
 	Created timestamp default current_timestamp null,
+	Nick varchar(255) not null,
 	constraint Scam_Blacklist_pk
 		primary key (ID),
 	constraint Scam_Blacklist_Users__SteamID_fk
@@ -84,3 +85,22 @@ SQL::i()->MakeTable('create table if not exists Scam_Blacklist
 	constraint Scam_Blacklist_Users__SteamID_fk_2
 		foreign key (Authenticater) references Users (SteamID)
 );');
+
+SQL::i()->MakeTable('create table if not exists User_Settings
+(
+	ID int auto_increment,
+	UserID varchar(255) null,
+	Setting varchar(255) null,
+	Active int default true null,
+	Updated timestamp default current_timestamp null,
+	Created timestamp default current_timestamp null,
+	constraint User_Setting_pk
+		primary key (ID),
+	constraint User_Setting_Users_SteamID_fk
+		foreign key (UserID) references Users (SteamID)
+);');
+
+//Settings::i()->newSetting(User::i()->getSteamID(), 'Jey', true);
+Settings::i()->updateSetting(User::i()->getSteamID(), 'Jey', false);
+
+//SQL::i()->MakeTable('TRUNCATE TABLE Scam_Report;');

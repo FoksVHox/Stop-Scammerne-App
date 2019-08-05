@@ -155,4 +155,10 @@ class User
 
         return $this->getUserData($SteamID)['GangID'];
     }
+
+    // Get the Status of a player
+    public function getStatus($SteamID = null)
+    {
+        return $this->getUserData($SteamID)['Status'];
+    }
 }

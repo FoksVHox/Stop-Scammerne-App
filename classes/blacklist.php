@@ -42,11 +42,12 @@ class Blacklist
             }
 
             // Add entry to the blacklist table
-            $stmt = SQL::i()->conn()->prepare('INSERT INTO Scam_Blacklist(ReporterID, ScammerID, Reason, Proff, Authenticater) VALUES (:report, :scamid, :reason, :proff, :auth)');
+            $stmt = SQL::i()->conn()->prepare('INSERT INTO Scam_Blacklist(ReporterID, ScammerID, Reason, Proff, Authenticater, Nick) VALUES (:report, :scamid, :reason, :proff, :auth, :nick)');
             $stmt->bindParam(':report', $res['ReporterID']);
             $stmt->bindParam(':scamid', $res['ScammerID']);
             $stmt->bindParam(':reason', $res['Reason']);
             $stmt->bindParam(':proff', $res['Proff']);
+            $stmt->bindParam(':proff', User::i()->getUserData($res['ScammerID'])['Name'] );
             $stmt->bindParam(':auth', $Auth);
             if($stmt->execute()){
                 return true;
@@ -79,7 +80,10 @@ class Blacklist
         }
     }
 
-    
 }
 
 // https://i.imgur.com/UAMni86.png
+
+// Blacklist thingy 
+
+// https://i.imgur.com/qNPEgWr.png

@@ -14,6 +14,10 @@ class Config
 
     // App version. Remember to change this when you update your app, to not have caching of your assets be messed up.
     private static $Version = '1.0.1';
+
+    // App Name
+    private static $AppName = 'Stop Scammerne';
+
     // Is the app in development?
     private static $InDevelopment = true;
 
@@ -49,5 +53,10 @@ class Config
     public function getRealVer()
     {
         return self::$Version;
+    }
+
+    public function getAppName()
+    {
+        return self::$AppName;
     }
 }
