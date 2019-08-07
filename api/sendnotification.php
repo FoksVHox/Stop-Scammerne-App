@@ -6,4 +6,4 @@ require_once '../__init.php';
 User::i()->login();
 
 // Send the actual notification
-echo json_encode(SxApi::i()->sendNotification(User::i()->getSteamID(), 'Test application', 'This notification is a test yes?'));
+echo json_encode(SxApi::i()->sendNotification(User::i()->getSteamID(), 'Blacklist Request #95', 'Your blacklist Request (#95) has been aproved'));

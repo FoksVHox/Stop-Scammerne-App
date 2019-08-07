@@ -12,9 +12,13 @@ Layout::i()->header();
 
 // Echo our navbar
 Layout::i()->nav();
-Layout::i()->Sidebar();
 ?>
 
+<div class="container">
+    <div class="container-fluid">
+        <?=Layout::i()->AdminNav();?>
+    </div>
+</div>
 
 <?php
 // Echo our footer and scripts

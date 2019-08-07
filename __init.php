@@ -67,6 +67,23 @@ SQL::i()->MakeTable('create table if not exists Scam_Report
 		foreign key (ReporterID) references Users (SteamID)
 );');
 
+// Make Scam_old_report table
+SQL::i()->MakeTable('create table if not exists Scam_old_report
+(
+	ID int auto_increment,
+	OldID int not null,
+	ReporterID varchar(255) not null,
+	ScammerID VARCHAR(255) not null,
+	Reason TEXT not null,
+	Proff TEXT not null,
+	Status VARCHAR(255) not null,
+	created datetime default current_timestamp null,
+	constraint Scam_old_report_pk
+		primary key (ID),
+	constraint Scam_old_report_Users_SteamID_fk
+		foreign key (ReporterID) references Users (SteamID)
+);');
+
 // Make Scam_Blacklist table
 SQL::i()->MakeTable('create table if not exists Scam_Blacklist
 (
@@ -100,7 +117,51 @@ SQL::i()->MakeTable('create table if not exists User_Settings
 		foreign key (UserID) references Users (SteamID)
 );');
 
-//Settings::i()->newSetting(User::i()->getSteamID(), 'Jey', true);
-Settings::i()->updateSetting(User::i()->getSteamID(), 'Jey', false);
+SQL::i()->MakeTable('create table if not exists Logs
+(
+	ID int auto_increment,
+	User varchar(255) null,
+	Type varchar(255) not null,
+	Changes text not null,
+	Date timestamp default current_timestamp null,
+	constraint Logs_pk
+		primary key (ID),
+	constraint Logs_Users_SteamID_fk
+		foreign key (user) references Users (SteamID)
+);');
 
-//SQL::i()->MakeTable('TRUNCATE TABLE Scam_Report;');
+SQL::i()->MakeTable('create table if not exists User_Notification
+(
+	ID int auto_increment,
+	NotificationID int not null,
+	UserID VARCHAR(255) not null,
+	`Read` int default 0 not null,
+	Title VARCHAR(255) not null,
+	Type varchar(255) not null,
+	Body text not null,
+	constraint User_Notification_pk
+		primary key (ID),
+	constraint User_Notification_Users_SteamID_fk
+		foreign key (UserID) references Users (SteamID)
+);');
+
+// Settings for the Jobs
+// Settings::i()->newSetting(User::i()->getSteamID(), 'New Jobs', true);
+// Settings::i()->newSetting(User::i()->getSteamID(), 'New Job comment', true);
+// Settings::i()->newSetting(User::i()->getSteamID(), 'New Job applicants', true);
+// Settings::i()->newSetting(User::i()->getSteamID(), 'New budget', true);
+
+// Settings for the market place
+// Settings::i()->newSetting(User::i()->getSteamID(), 'New Items', true);
+// Settings::i()->newSetting(User::i()->getSteamID(), 'New Item comment', true);
+// Settings::i()->newSetting(User::i()->getSteamID(), 'New Item Purchase', true);
+// Settings::i()->newSetting(User::i()->getSteamID(), 'New Item Update', true);
+// Settings::i()->newSetting(User::i()->getSteamID(), 'New Item Deactivated', true);
+
+// Settings for blacklist
+// Settings::i()->newSetting(User::i()->getSteamID(), 'New Blacklist', true);
+// Settings::i()->newSetting(User::i()->getSteamID(), 'New get blacklist', true);
+// Settings::i()->newSetting(User::i()->getSteamID(), 'New Scammer Online', true);
+
+//print_r(Settings::i()->getSettings());
+//	SQL::i()->MakeTable('TRUNCATE TABLE User_Notification;');

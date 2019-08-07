@@ -48,6 +48,9 @@ class User
                 
                 // Execute the SQL query
                 $stmt->execute();
+
+                // Log the users creation
+                Misc::i()->addToLog($Login['SteamID'], 'User Login', $Login['Name'].' logged in');
             } else { // New users
                 // Prepare new SQL query to create the user in our local database
                 $stmt = SQL::i()->conn()->prepare('INSERT INTO Users (SteamID, Name, VIP, Rank, GangID) VALUES(:SteamID, :Name, :VIP, :Rank, :GangID)');
@@ -60,6 +63,9 @@ class User
                 $stmt->bindParam(':GangID', $Login['GangID']);
                 
                 $stmt->execute();
+
+                // Log the users creation
+                Misc::i()->addToLog($Login['SteamID'], 'User Registered', $Login['Name'].' registered');
             }
 
             // Caching of frequently-used variables

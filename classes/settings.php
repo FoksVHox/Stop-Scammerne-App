@@ -7,7 +7,19 @@ class Settings
     // TODO Make checks if UserID is a player in SxDB
 
     private static $SetDefaultSettings = true;
-    private static $ServerSettings = array();
+    private static $ServerSettings = array(
+        'New Jobs', 
+        'New Job comment', 
+        'New Job applicants', 
+        'New budget', 
+        'New Items', 
+        'New Item comment',
+        'New Item Purchase',
+        'New Item Update',
+        'New Item Deactivated',
+        'New Blacklist',
+        'New get blacklist',
+        'New Scammer Online');
 
 
     // Make a new setting to a player for the spicefic setting
@@ -19,9 +31,7 @@ class Settings
         $stmt->bindParam(':set', $Setting);
         $stmt->execute();
 
-        if($stmt->rowCount() == 1){
-            $this->updateSetting($User, $Setting, $Active);
-        } else {
+        if($stmt->rowCount() == 0){
             // Check if the Active is a bool, so we can convert to a number
             if($Active === true){
                 $Active = 1;
@@ -55,6 +65,22 @@ class Settings
         $stmt->bindParam(':id', $User);
         
         return $stmt->execute();
+    }
+
+    public function getSettings($Setting, $User)
+    {
+        $stmt = SQL::i()->conn()->prepare('SELECT Active FROM User_Settings WHERE Setting = :setting AND UserID = :id');
+        $stmt->bindParam(':setting', $Setting);
+        $stmt->bindParam(':id', $User);
+        $stmt->execute();
+        $res = $stmt->fetch();
+
+        // Convert into HTML
+        if($res['Active'] == 1){
+            return 'checked';
+        }
+
+        //return $res;
     }
 
 }

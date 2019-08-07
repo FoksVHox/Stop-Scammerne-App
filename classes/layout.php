@@ -14,7 +14,7 @@ class Layout
         
             <!-- Adding the Config::i()->getVersion() thing makes caching way easier to deal with. In development mode, the version will be a randomized string on each visit, to completely bypass the cache -->
             <link rel="stylesheet" type="text/css" href="/assets/css/app.css?v=<?=Config::i()->getVersion()?>">
-            <script src="https://kit.fontawesome.com/05b497df87.js"></script>
+            <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css" integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/" crossorigin="anonymous">
         </head>
         <?php
     }
@@ -29,6 +29,9 @@ class Layout
                 <a class="nav-link active" href="../">Hjem</a>
                 <a class="nav-link active" href="../blacklist.php">Blacklist</a>
             </ul>
+
+            <a href="notifications.php" class="nav-item mr-2"> <span class="badge badge-success">52</span> </a>
+
             <div class="nav-item dropdown">
                 <a class="dropdown-toggle mr-3" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false" style="color: white; text-decoration: none;"> Logget ind som: <?=User::i()->getName()?></a>
                 <div class="dropdown-menu">
@@ -88,26 +91,81 @@ class Layout
         echo '</body>';
     }
 
-    public function Sidebar()
+    public function AdminNav()
     { ?>
-      <div class="row">
-        <div class="col-2">
-            <div class="nav flex-column nav-pills" id="v-pills-tab" role="tablist" aria-orientation="vertical">
-                <a class="nav-link active" id="v-pills-home-tab" data-toggle="pill" href="#v-pills-home" role="tab" aria-controls="v-pills-home" aria-selected="true">Home</a>
-                <a class="nav-link" id="v-pills-profile-tab" data-toggle="pill" href="#v-pills-profile" role="tab" aria-controls="v-pills-profile" aria-selected="false">Profile</a>
-                <a class="nav-link" id="v-pills-messages-tab" data-toggle="pill" href="#v-pills-messages" role="tab" aria-controls="v-pills-messages" aria-selected="false">Messages</a>
-                <a class="nav-link" id="v-pills-settings-tab" data-toggle="pill" href="#v-pills-settings" role="tab" aria-controls="v-pills-settings" aria-selected="false">Settings</a>
-            </div>
-        </div>
-        <div class="col-10">
-            <div class="tab-content" id="v-pills-tabContent">
-                <div class="tab-pane fade show active" id="v-pills-home" role="tabpanel" aria-labelledby="v-pills-home-tab">...</div>
-                <div class="tab-pane fade" id="v-pills-profile" role="tabpanel" aria-labelledby="v-pills-profile-tab">...</div>
-                <div class="tab-pane fade" id="v-pills-messages" role="tabpanel" aria-labelledby="v-pills-messages-tab">...</div>
-                <div class="tab-pane fade" id="v-pills-settings" role="tabpanel" aria-labelledby="v-pills-settings-tab">...</div>
-            </div>
-        </div>
-    </div>
+        <ul class="nav nav-pills nav-fill">
+<!-- Index -->
+<li class="nav-item">
+  <a class="<?php
+  if (stripos($_SERVER['REQUEST_URI'], 'moderator.php')){
+    echo 'nav-link text-white bg-dark';
+  }else{
+    echo 'nav-link text-dark';
+  }?>"
+  href="../admin/moderator.php">Forside</a>
+</li>
+
+<!-- Anmodninger -->
+<li class="nav-item dropdown">
+ <a class="dropdown-toggle <?php
+
+ if (stripos($_SERVER['REQUEST_URI'], 'admin.php') || stripos($_SERVER['REQUEST_URI'], 'requests.php') || stripos($_SERVER['REQUEST_URI'], 'blacklist.php') || stripos($_SERVER['REQUEST_URI'], 'blacklistinfo.php')){
+   echo 'nav-link text-white bg-dark';
+ }else{
+   echo 'nav-link text-dark';
+ }?>" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Anmodninger</a>
+ <div class="dropdown-menu">
+   <a class="dropdown-item" href="../admin/admin.php">Køb af produkter</a>
+   <a class="dropdown-item" href="../admin/requests.php">Produkt anmodninger</a>
+   <a class="dropdown-item" href="../admin/blacklist.php">Blacklist anmodninger</a>
+ </div>
+</li>
+
+<!-- Produkt Håndtering -->
+<li class="nav-item dropdown">
+<a class="nav-link dropdown-toggle <?php
+
+if (stripos($_SERVER['REQUEST_URI'], 'addproduct.php') || stripos($_SERVER['REQUEST_URI'], 'editproducts.php')){
+  echo 'nav-link text-white bg-dark';
+}else{
+  echo 'nav-link text-dark';
+}?>" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Produkter</a>
+<div class="dropdown-menu">
+  <a class="dropdown-item" href="../admin/addproduct.php">Tilføj produkt</a>
+  <a class="dropdown-item" href="../admin/editproducts.php">Rediger produkter</a>
+</div>
+</li>
+
+<!-- Bruger håndtering -->
+<li class="nav-item dropdown">
+<a class="nav-link dropdown-toggle <?php
+
+if (stripos($_SERVER['REQUEST_URI'], 'users.php') || stripos($_SERVER['REQUEST_URI'], 'whitelist.php')){
+  echo 'nav-link text-white bg-dark';
+}else{
+  echo 'nav-link text-dark';
+}?>" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Brugere</a>
+<div class="dropdown-menu">
+  <a class="dropdown-item" href="../admin/users.php">Brugere</a>
+  <a class="dropdown-item" href="../admin/whitelist.php">Whitelist</a>
+</div>
+</li>
+
+<!-- Side Administrering -->
+<li class="nav-item dropdown">
+<a class="nav-link dropdown-toggle <?php
+
+if (stripos($_SERVER['REQUEST_URI'], 'msg.php') || stripos($_SERVER['REQUEST_URI'], 'editfaq.php')){
+ echo 'nav-link text-white bg-dark';
+}else{
+ echo 'nav-link text-dark';
+}?>" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Side Administrering</a>
+<div class="dropdown-menu">
+ <a class="dropdown-item" href="../admin/msg.php">Beskeder</a>
+ <a class="dropdown-item" href="..k/admin/editfaq.php">Rediger FAQ</a>
+</div>
+</li>
+        </ul>
     <?php
     }
 }

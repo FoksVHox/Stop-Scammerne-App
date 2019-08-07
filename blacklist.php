@@ -98,10 +98,10 @@ Layout::i()->nav();
         <table class="table table-striped">
             <thead class="thead-dark">
                 <tr>
-                    <th>Navn</th>
-                    <th>SteamID</th>
-                    <th>Grund</th>
-                    <th>Dato</th>
+                    <th style="width: 25%;">Navn</th>
+                    <th style="width: 25%;">SteamID</th>
+                    <th style="width: 25%;">Grund</th>
+                    <th style="width: 25%;">Dato</th>
                 </tr>
             </thead>
             <tbody>
@@ -116,7 +116,7 @@ Layout::i()->nav();
                         foreach ($res as $k => $v) {
                             echo '            
                             <tr>
-                                <th>'.$v['Nick'].'</th>
+                                <td>'.$v['Nick'].'</td>
                                 <td>'.$v['ScammerID'].'</td>
                                 <td>'.$v['Reason'].'</td>
                                 <td>'.$v['Created'].'</td>

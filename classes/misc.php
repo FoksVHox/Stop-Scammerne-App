@@ -14,4 +14,13 @@ class Misc
         }
         return $str;
     }
+
+    public function addToLog($User, $Type, $Changes)
+    {
+        $stmt = SQL::i()->conn()->prepare('INSERT INTO Logs(`User`, `Type`, `Changes`) VALUES (:id, :ty, :cha)');
+        $stmt->bindParam(':id',$User);
+        $stmt->bindParam(':ty', $Type);
+        $stmt->bindParam(':cha', $Changes);
+        $stmt->execute();
+    }
 }

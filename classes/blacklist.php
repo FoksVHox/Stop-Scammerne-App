@@ -20,36 +20,53 @@ class Blacklist
         $stmt->bindParam(':scam', $ScamID);
         $stmt->bindParam(':reason', $Reason);
         $stmt->bindParam(':proff', $Proof);
+        Misc::i()->addToLog($Reporter, 'Blacklist Request', 'Requested a blacklist on '.$ScamID);
         return $stmt->execute();
     }
 
-    public function BlacklistConfirm($ScamID, $Auth)
+    public function BlacklistConfirm($ScamID, $Auth, $AReason)
     {
         $res = User::i()->getUserData($Auth);
-        if($res['Status'] == 1){
+        if($res['Status'] >= 1){
 
             // Find the entry
-            $stmt = SQL::i()->conn()->prepare('SELECT * FROM Scam_Report WHERE ID = :id');
-            $stmt->bindParam(':id', $Auth);
+            $stmt = SQL::i()->conn()->prepare('SELECT * FROM Scam_Report WHERE ScammerID = :id');
+            $stmt->bindParam(':id', $ScamID);
             $stmt->execute();
             $res = $stmt->fetch();
 
+            $confirm = 'Confirmed';
+
             // Delete entry
-            $stmt = SQL::i()->conn()->prepare('DELETE FROM Scam_Report WHERE ID = :id');
-            $stmt->bindParam(':id', $Auth);
-            if(!$stmt->execute() == true){
-                return false;
-            }
+            $stmt = SQL::i()->conn()->prepare('INSERT INTO Scam_old_report(OldID, ReporterID, ScammerID, Reason, Proff,Status, created) VALUES (:id, :rID, :sID, :reason, :proff, :status, :date)');
+            $stmt->bindParam(':id', $res['ID']);
+            $stmt->bindParam(':rID', $res['ReporterID']);
+            $stmt->bindParam(':sID', $res['ScammerID']);
+            $stmt->bindParam(':reason', $res['Reason']);
+            $stmt->bindParam(':proff', $res['Proff']);
+            $stmt->bindParam(':status', $confirm);
+            $stmt->bindParam(':date', $res['created']);
+            $stmt->execute();
+
+            // Fully delete the entry
+            $stmt = SQL::i()->conn()->prepare('DELETE FROM Scam_Report WHERE ID = :r');
+            $stmt->bindParam(':r', $res['ID']);
+            $stmt->execute();
 
             // Add entry to the blacklist table
             $stmt = SQL::i()->conn()->prepare('INSERT INTO Scam_Blacklist(ReporterID, ScammerID, Reason, Proff, Authenticater, Nick) VALUES (:report, :scamid, :reason, :proff, :auth, :nick)');
             $stmt->bindParam(':report', $res['ReporterID']);
             $stmt->bindParam(':scamid', $res['ScammerID']);
-            $stmt->bindParam(':reason', $res['Reason']);
+            $stmt->bindParam(':reason', $AReason);
             $stmt->bindParam(':proff', $res['Proff']);
-            $stmt->bindParam(':proff', User::i()->getUserData($res['ScammerID'])['Name'] );
             $stmt->bindParam(':auth', $Auth);
+            $stmt->bindParam(':nick', User::i()->getUserData($res['ScammerID'])['Name'] );
             if($stmt->execute()){
+                Misc::i()->addToLog($Auth, 'Blacklist Confirm', User::i()->getName().' confirmed Blacklist Request #'.$res['ID']);
+                Notification::i()->SendNotification($res['ReporterID'],'Blacklist Request #'.$res['ID'], 
+                'Hej, '.User::i()->getUserData($res['ReporterID'])['Name'].'
+                Vi er meget glade for at medele at din blacklist Request ('.$res['ID'].') er blevet godkendt! Vi har tilføjet '.User::i()->getUserData($res['ScammerID'])['Name'].' til blacklisten! 
+                - Stop Scammerne', 'Success' );
                 return true;
             } else {
                 return false;
@@ -78,6 +95,14 @@ class Blacklist
         } else {
             return 'Error';
         }
+    }
+
+    public function getRequestbyID($id)
+    {
+        $stmt = SQL::i()->conn()->prepare('SELECT * FROM Scam_Report WHERE ID = :id');
+        $stmt->bindParam(':id', $id);
+        $stmt->execute();
+        return $stmt->fetch();
     }
 
 }

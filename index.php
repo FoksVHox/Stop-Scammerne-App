@@ -22,6 +22,7 @@ Layout::i()->nav();
     <div class="custom-control custom-checkbox mt-2">
         <input type="checkbox" class="custom-control-input" id="tabletcloseable" checked>
         <label class="custom-control-label" for="tabletcloseable">Allow tablet to be closed</label>
+
     </div>
     
 </div>
