@@ -17,3 +17,4 @@ if (isset($_POST['ScamID']) || isset($_POST['Proff']) || isset($_POST['Reason'])
 } else {
     header('Location: ../blacklist.php?call=Posterror');
 }
+

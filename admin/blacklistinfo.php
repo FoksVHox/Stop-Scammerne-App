@@ -59,8 +59,8 @@ $reqNum = $res['ID']
                     <div class="card-body">
                         <button class="btn btn-success btn-block" data-toggle="modal" data-target="#AcceptModal">Accepter</button>
                         <button class="btn btn-danger btn-block" data-toggle="modal" data-target="#RemoveModal">Afvis</button>
-                        <button class="btn btn-info btn-block" data-toggle="modal" data-target="#InfoReportModal">Infomation om anmelder</button>
-                        <button class="btn btn-info btn-block" data-toggle="modal" data-target="#InfoScamModal">Infomation om scammer</button>
+                      <!--  <button class="btn btn-info btn-block" data-toggle="modal" data-target="#InfoReportModal">Infomation om anmelder</button>
+                        <button class="btn btn-info btn-block" data-toggle="modal" data-target="#InfoScamModal">Infomation om scammer</button> -->
                     </div>
                 </div>
             </div>
@@ -103,11 +103,11 @@ $reqNum = $res['ID']
         </button>
       </div>
       <div class="modal-body">
-        <form action="../actions/adminBlacklist.php" method="post">
+        <form action="../actions/adminBlacklist.php?id=<?=$reqNum?>" method="post">
             <div class="form-group">
-                <input type="text" name="Remove" class="form-control" placeholder="Skriv grund til afvising">
+                <input type="text" name="Deny" class="form-control" placeholder="Skriv grund til afvising">
             </div>
-            <button type="button" class="btn btn-danger btn-block">Afvis</button>
+            <button type="submit" class="btn btn-danger btn-block">Afvis</button>
         </form>
       </div>
 

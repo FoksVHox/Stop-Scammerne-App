@@ -34,7 +34,7 @@ Layout::i()->nav();
                 $res = [];
                 $res = Blacklist::i()->getAwaiting();
 
-                if($res > 0){
+                if(!$res < 1){
                     foreach($res as $k => $v){
                         echo '            
                         <tr>
@@ -48,7 +48,7 @@ Layout::i()->nav();
                 } else {
                     echo '
                     <tr>
-                        <td colspan="4">Der er ingen blacklist anmodninger</td>
+                        <td colspan="5" class="text-center">Der er ingen blacklist anmodninger</td>
                     </tr>';
                 }
 

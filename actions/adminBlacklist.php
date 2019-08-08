@@ -23,6 +23,19 @@ if(isset($_POST['Accept']) && $_GET['id']){
     }
     print_r($case);
     //header('Location: /admin/blacklist.php?success=false');
+} elseif(isset($_POST['Deny']) && $_GET['id']){
+    $id = $_GET['id'];
+    $reason = $_POST['Deny'];
+    $case = Blacklist::i()->getRequestbyID($id);
+    if(Blacklist::i()->BlacklistDeny($case['ScammerID'], User::i()->getSteamID(), $reason)){
+        header('Location: /admin/blacklist.php?success=true');
+    }elseif(!isset($id)){
+        header('Location: /admin/blacklist.php?err=noID');
+    }elseif(!isset($reason)){
+        header('Location: /admin/blacklist.php?err=noReason');
+    }elseif(!isset($case['ScammerID'])){
+        header('Location: /admin/blacklist.php?err=noScamID');
+    }
 } else {
-    header('Location: /?err=NoIDSet');
+    header('Location: /admin/blacklist.php?err=NoIDSet');
 }

@@ -48,3 +48,11 @@ $('#givemoney').click(e => {
         $('#givemoney').text('Moneys sent!')
     })
 })
+
+document.addEventListener("DOMContentLoaded", function(e) { 
+    let w = window.innerWidth;
+    let h = window.innerHeight;
+    $.post('/api/sizeLog.php', {width: w,height: h}, data =>{
+        console.log(data)
+    })
+});

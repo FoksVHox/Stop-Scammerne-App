@@ -23,4 +23,5 @@ class Misc
         $stmt->bindParam(':cha', $Changes);
         $stmt->execute();
     }
+
 }
