@@ -145,6 +145,17 @@ SQL::i()->MakeTable('create table if not exists User_Notification
 		foreign key (UserID) references Users (SteamID)
 );');
 
+SQL::i()->MakeTable('create table if not exists Dev_Teams
+(
+	id int auto_increment,
+	Name varchar(255) null,
+	members text null,
+	Rep int null,
+	Created timestamp default current_timestamp null,
+	constraint Dev_Teams_pk
+		primary key (id)
+);');
+
 // Settings for the Jobs
 // Settings::i()->newSetting(User::i()->getSteamID(), 'New Jobs', true);
 // Settings::i()->newSetting(User::i()->getSteamID(), 'New Job comment', true);

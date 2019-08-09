@@ -21,41 +21,12 @@ Layout::i()->nav();
 
 <div class="container mt-5">
     <div class="container-fluid">
-
-        <?php
-        
-            if(isset($_GET['call'])){
-                if ($_GET['call'] === 'success'){
-                    echo '
-                    <div class="alert alert-success alert-dismissible fade show" role="alert">
-                        <strong>Tak!</strong> Vi er rigtig glade for, at du vil hjælpe andre med at undgå at blive syndt!
-
-                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                        </button>
-                    </div>';
-                } elseif ($_GET['call'] === 'error') {
-                    echo '
-                    <div class="alert alert-danger alert-dismissible fade show" role="alert">
-                        <strong>Pinligt</strong> Kontakt Jimmi hurtigst muligt!
-
-                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                        </button>
-                    </div>';  
-                } elseif ($_GET['call'] === 'Posterror') {
-                    echo '
-                    <div class="alert alert-danger alert-dismissible fade show" role="alert">
-                        <strong>Whoops</strong> Er du sikker på at du har fyldt alle felter?
-
-                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                        </button>
-                    </div>'; 
-                }
-            }
-        ?>
-
+				<div class="input-group mb-3">
+				 	<input type="text" class="form-control" id = "search" placeholder="Produktnavn" aria-label="Produktnavn" aria-describedby="btn-search">
+				  	<div class="input-group-append">
+				    	<button class="btn btn-primary" type="button" id="btn-search" onclick = "search(1);">Søg</button>
+				  	</div>
+				</div>
         <p>
             <a class="btn btn-primary" data-toggle="collapse" href="#addCocksucker" role="button" aria-expanded="false" aria-controls="collapseExample">Tilføj spiller til blacklist</a>
         </p>
@@ -104,8 +75,8 @@ Layout::i()->nav();
                     <th style="width: 25%;">Dato</th>
                 </tr>
             </thead>
-            <tbody>
-                <?php
+            <tbody id="live">
+            <?php
                     $res = Blacklist::i()->getBlacklisted();
                     if(!$res < 0){
                         echo '
@@ -154,4 +125,49 @@ Layout::i()->footer();
     });
   }, false);
 })();
+
+function search(num){
+    $("#live").empty();
+    $("#loadingbar").show();
+
+    //var cat = $("#SortByCat").val();
+    //var valu = $("#SortByValue").val();
+    var search = $("#search").val();
+   // var page = num;
+
+    $.ajax({
+        type: 'POST',
+        url: 'bSearch.php',
+        data: {
+            //cat: cat,
+            //valu: valu,
+            term: search,
+            //page: page
+        },
+        success: function(result){
+                $("#live").html(result);
+                $("#loadingbar").hide();                
+        },
+        error: function (jqXHR, exception) {
+            var msg = '';
+            if (jqXHR.status === 0) {
+                msg = 'Ikke forbundet til internettet.\n Tjek internetforbindelse.';
+            } else if (jqXHR.status == 404) {
+                msg = 'Siden blev ikke fundet. [404]';
+            } else if (jqXHR.status == 500) {
+                msg = 'Server fejl, kontakt ZeNoxXi [500].';
+            } else if (exception === 'parsererror') {
+                msg = 'Requested JSON parse failed.';
+            } else if (exception === 'timeout') {
+                msg = 'Timeout, prøv igen';
+            } else if (exception === 'abort') {
+                msg = 'Afbrudt, prøv igen.';
+            } else {
+                msg = 'Ukendt fejl: .\n' + jqXHR.responseText;
+            }
+            $("#loadingbar").hide();
+        },
+    });
+}
+
 </script>
