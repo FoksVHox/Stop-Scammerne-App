@@ -22,7 +22,7 @@ Layout::i()->nav();
 <div class="container mt-5">
     <div class="container-fluid">
 				<div class="input-group mb-3">
-				 	<input type="text" class="form-control" id = "search" placeholder="Produktnavn" aria-label="Produktnavn" aria-describedby="btn-search">
+				 	<input type="text" class="form-control" id = "search" placeholder="SteamID" aria-label="Produktnavn" aria-describedby="btn-search">
 				  	<div class="input-group-append">
 				    	<button class="btn btn-primary" type="button" id="btn-search" onclick = "search(1);">Søg</button>
 				  	</div>

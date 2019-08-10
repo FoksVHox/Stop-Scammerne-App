@@ -26,7 +26,6 @@ class Layout
             <a class="navbar-brand" href="/"><?=Config::i()->getAppName()?></a>
 
             <ul class="navbar-nav mr-auto">
-                <a class="nav-link active" href="../">Hjem</a>
                 <a class="nav-link active" href="../blacklist.php">Blacklist</a>
             </ul>
 

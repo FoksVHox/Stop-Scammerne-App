@@ -52,7 +52,7 @@ class Config
 
     public function getRealVer()
     {
-        return '1.1.1';
+        return '1.1.2';
     }
 
     public function getAppName()
