@@ -96,7 +96,7 @@ Layout::i()->nav();
                     }
                 ?>
             </tbody>
-        </table>  
+        </table> 
 
     </div>
 </div>

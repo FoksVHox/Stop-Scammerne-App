@@ -66,6 +66,7 @@ class User
 
                 // Log the users creation
                 Misc::i()->addToLog($Login['SteamID'], 'User Registered', $Login['Name'].' registered');
+                Steam::i()->UpdatePicture($Login['SteamID'], Steam::i()->getProfilePicture($Login['SteamID']));
             }
 
             // Caching of frequently-used variables

@@ -12,6 +12,9 @@ Layout::i()->header();
 
 // Echo our navbar
 Layout::i()->nav();
+
+// Check if there is a new profile picture to a player
+Steam::i()->CheckPicture(User::i()->getSteamID())
 ?>
 
 <div class="text-center">

@@ -65,4 +65,32 @@ class Steam{
         }
     }
 
+    public function CheckPicture($id)
+    {
+        $stmt = SQL::i()->conn()->prepare('SELECT ProfilePicture FROM Users WHERE SteamID = :s');
+        $stmt->bindParam(':s', $id);
+        $stmt->execute();
+        $link = $stmt->fetch();
+
+        $newLink = $this->getProfilePicture($id);
+        $this->UpdatePicture($id, $newLink);
+    }
+
+    public function UpdatePicture($id, $link)
+    {
+
+        $stmt = SQL::i()->conn()->prepare('UPDATE Users SET ProfilePicture = :p WHERE SteamID = :s');
+        $stmt->bindParam(':p', $link);
+        $stmt->bindParam(':s', $id);
+        if(!$stmt->execute()){
+            return false;
+        }
+        //Misc::i()->addToLog($id, 'Updated Picture', 'Updated prfile picture for '.User::i()->getUserData($id)['Name']);
+    }
+
+    public function isSteamID($id)
+    {
+       return preg_match('/^STEAM_[0-5]:[01]:\d+$/', $id);
+    }
+
 }
