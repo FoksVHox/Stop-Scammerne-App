@@ -51,7 +51,7 @@ Layout::i()->nav();
                         </div>
                         <div class="col-md-8">
                             <div class="card-body">
-                                <h5 class="card-title"><?=substr($v['Name'], 0, 12)?></h5>
+                                <h5 class="card-title"><?=substr($v['Name'], 0, 14)?></h5>
                                 
                             </div>
                         </div>
