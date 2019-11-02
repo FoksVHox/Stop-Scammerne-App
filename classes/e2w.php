@@ -1,12 +1,12 @@
 <?php
 
-class E2Whitelist
+class E2W
 {
     use Singleton;
 
     public function getBlacklist()
     {
-        $output ="";
+        $output;
         $url = 'https://www.e2whitelist.com/api/checkBlacklist.php';
         $data = array("API"=>"sAbf6A)37&235bSnsa7dSAS5nas53nl");
      

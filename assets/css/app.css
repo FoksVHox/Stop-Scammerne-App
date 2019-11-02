@@ -3,18 +3,3 @@ body {
     display: flex;
     flex-direction: column
 }
-.photo{
-    background-color: #323232;
-    width: 75px;
-    height: 75px;
-}
-
-.photo1{
-    background-color: #323232;
-    width: 184px;
-    height: 184px;
-}
-
-.u:hover{
-    text-decoration: none;
-}

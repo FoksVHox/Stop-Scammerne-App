@@ -36,9 +36,9 @@ $res = User::i()->getUserData($reqInfo['User']);
 
             <img src="<?=$res['ProfilePicture']?>" class="rounded-circle" style="max-width: 128px; max-height: 128px;">
             <br><br>  
-            <a href="#" onclick="Response(true,'<?=$res['SteamID']?>')" class="btn btn-block btn-success">Accepter</a>
+            <a href="#" onclick="Response(true)" class="btn btn-block btn-success">Accepter</a>
             <a href="developer.php" class="btn btn-block btn-dark">Tilbage</a>
-            <a href="#" onclick="Response(false,'<?=$res['SteamID']?>')" class="btn btn-block btn-danger">Afvis</a>
+            <a href="#" onclick="Response(false)" class="btn btn-block btn-danger">Afvis</a>
         </div>
 
         <div class="col-lg-9">
@@ -61,16 +61,14 @@ $res = User::i()->getUserData($reqInfo['User']);
 </div>
 
 <script>
-  function Response(res, SteamID){
-    console.log(res);
+  function Response(res){
     if(res){
-      
-      $.post('../actions/developer.php',{accept: true, steamid: SteamID}, data =>{
-        console.log(data);
+      $.post('./actions/developer.php',{accept: true}, data =>{
+        console.log(data)
       });
     } else {
-      $.post('../actions/developer.php',{accept: false, steamid: SteamID}, data =>{
-        console.log(data);
+      $.post('./actions/developer.php',{accept: false}, data =>{
+        console.log(data)
       });
     }
   }
