@@ -101,8 +101,6 @@ class Layout
 
                             <div class="dropdown-divider"></div>
 
-                            <a class="dropdown-item" href="../developer/dev.php"> Udviker</a>
-
                             <a class="dropdown-item"href="../developer/dashboard.php"></i> Dashboard</a>
 
                     <?php
@@ -196,7 +194,6 @@ class Layout
 
 
     public function AdminNav()
-
     { ?>
 
         <ul class="nav nav-pills nav-fill">
@@ -342,6 +339,149 @@ if (stripos($_SERVER['REQUEST_URI'], 'msg.php') || stripos($_SERVER['REQUEST_URI
 </div>
 
 </li>
+
+        </ul>
+
+    <?php
+
+    }
+
+    public function DeveloperNav($id)
+    { 
+        $idm = $id;
+      ?>
+
+        <ul class="nav nav-pills nav-fill">
+
+          <!-- Index -->
+
+          <li class="nav-item">
+
+            <a class="<?php
+
+            if (stripos($_SERVER['REQUEST_URI'], 'dashboard.php')){
+
+              echo 'nav-link text-white bg-dark';
+
+            }else{
+
+              echo 'nav-link text-dark';
+
+            }?>"
+
+            href="dashboard.php?id=<?=$idm?>">Forside</a>
+
+          </li>
+
+
+
+          <!-- Anmodninger -->
+
+          <li class="nav-item">
+
+            <a class="<?php
+
+            if (stripos($_SERVER['REQUEST_URI'], 'members.php')){
+
+              echo 'nav-link text-white bg-dark';
+
+            }else{
+
+              echo 'nav-link text-dark';
+
+            }?>"
+
+            href="members.php?id=<?=$idm?>">Medlemmer</a>
+
+          </li>
+
+
+
+          <!-- Produkt Håndtering -->
+
+          <li class="nav-item dropdown">
+
+          <a class="nav-link dropdown-toggle <?php
+
+
+
+          if (stripos($_SERVER['REQUEST_URI'], 'addproduct.php') || stripos($_SERVER['REQUEST_URI'], 'editproducts.php')){
+
+            echo 'nav-link text-white bg-dark';
+
+          }else{
+
+            echo 'nav-link text-dark';
+
+          }?>" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Produkter</a>
+
+          <div class="dropdown-menu">
+
+            <a class="dropdown-item" href="../admin/addproduct.php">Tilføj produkt</a>
+
+            <a class="dropdown-item" href="../admin/editproducts.php">Rediger produkter</a>
+
+          </div>
+
+          </li>
+
+
+
+          <!-- Bruger håndtering -->
+
+          <li class="nav-item dropdown">
+
+          <a class="nav-link dropdown-toggle <?php
+
+
+
+          if (stripos($_SERVER['REQUEST_URI'], 'users.php') || stripos($_SERVER['REQUEST_URI'], 'whitelist.php')){
+
+            echo 'nav-link text-white bg-dark';
+
+          }else{
+
+            echo 'nav-link text-dark';
+
+          }?>" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Brugere</a>
+
+          <div class="dropdown-menu">
+
+            <a class="dropdown-item" href="../admin/users.php">Brugere</a>
+
+          </div>
+
+          </li>
+
+
+
+          <!-- Side Administrering -->
+
+          <li class="nav-item dropdown">
+
+          <a class="nav-link dropdown-toggle <?php
+
+
+
+          if (stripos($_SERVER['REQUEST_URI'], 'msg.php') || stripos($_SERVER['REQUEST_URI'], 'editfaq.php')){
+
+          echo 'nav-link text-white bg-dark';
+
+          }else{
+
+          echo 'nav-link text-dark';
+
+          }?>" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Side Administrering</a>
+
+          <div class="dropdown-menu">
+
+          <a class="dropdown-item" href="../admin/msg.php">Beskeder</a>
+
+          <a class="dropdown-item" href="..k/admin/editfaq.php">Rediger FAQ</a>
+
+          </div>
+
+          </li>
 
         </ul>
 

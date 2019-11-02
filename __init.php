@@ -306,6 +306,39 @@ SQL::i()->MakeTable('create table if not exists Dev_Teams
 		foreign key (owner) references Users (SteamID)
 );');
 
+SQL::i()->MakeTable('create table if not exists Dev_Products
+(
+	id int auto_increment,
+	title varchar(255) not null,
+	`desc` text not null,
+	price int not null,
+	team int not null,
+	views int default 0 not null,
+	images text not null,
+	prodImage text not null,
+	LastUpdated timestamp default current_timestamp not null,
+	Created timestamp default current_timestamp not null,
+	constraint Dev_Products_pk
+		primary key (id),
+	constraint Dev_Products_Dev_Teams_id_fk
+		foreign key (team) references Dev_Teams (id)
+);');
+
+SQL::i()->MakeTable('create table if not exists Dev_Sales
+(
+	id int auto_increment,
+	product int not null,
+	buyer varchar(255) not null,
+	team int not null,
+	constraint Dev_Sales_pk
+		primary key (id),
+	constraint Dev_Sales_Dev_Products_id_fk
+		foreign key (product) references Dev_Products (id),
+	constraint Dev_Sales_Dev_Teams_id_fk
+		foreign key (team) references Dev_Teams (id),
+	constraint Dev_Sales_Users_SteamID_fk
+		foreign key (buyer) references Users (SteamID)
+);');
 
 
 // Settings for the Jobs
