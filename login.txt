@@ -1,17 +1,31 @@
-FTP Detaljer
-Host: ftp.web1.lim1.straire.net:21
-Username: sxtftpu_stopscammerne
-Password: 164f22d9a6900269
-
-SQL Detaljer
-Host: sql.web1.lim1.straire.net:3306
-Database: sxtdb_stopscammerne
-Username: sxtdbu_stopscammerne
-Password: 97c699c74d9bdd4a
-
-
-API Detaljer
-633382e4d72f10c3b50cfb5c3bb2762bdb958b2bf1518bfdc9558f36f0d096e97009675ef5fe13534f2494c15aeb0d48c21cda257697f5e0313f0965a487ca0e
-
-
+FTP Detaljer
+
+Host: ftp.web1.lim1.straire.net:21
+
+Username: sxtftpu_stopscammerne
+
+Password: 164f22d9a6900269
+
+
+
+SQL Detaljer
+
+Host: sql.web1.lim1.straire.net:3306
+
+Database: sxtdb_stopscammerne
+
+Username: sxtdbu_stopscammerne
+
+Password: 97c699c74d9bdd4a
+
+
+
+
+
+API Detaljer
+
+633382e4d72f10c3b50cfb5c3bb2762bdb958b2bf1518bfdc9558f36f0d096e97009675ef5fe13534f2494c15aeb0d48c21cda257697f5e0313f0965a487ca0e
+
+
+
 https://i.imgur.com/AcleTbB.png
